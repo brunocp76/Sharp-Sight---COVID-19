@@ -18,22 +18,23 @@ installr::updateR(fast = FALSE,
 
 # 1.1 - Packages ----
 
+Allocated_Memory <- paste(memory.size(),"Mb")
+
+cls <- function() cat("\f")
+
 library(data.table)
 library(zoo)
 library(tidyverse)
 library(lubridate)
 library(dtplyr)
 
+Allocated_Memory <- paste(memory.size(),"Mb")
 
 
 # 2 - Dataset Creation ----
 
 
 # 2.1 - Useful Functions ----
-
-Allocated_Memory <- paste(memory.size(),"Mb")
-
-cls <- function() cat("\f")
 
 covid_rename_columns <- function(input_data){
    input_data %>%
@@ -185,23 +186,23 @@ covid_data %>%
    tail(n = 15)
 
 # A tibble: 15 x 13
-#      country date       confirmed deaths recovered new_confirmed new_deaths new_recovered confirmed_inc deaths_inc recovered_inc death_pct recovery_pct
-#      <chr>   <date>         <dbl>  <dbl>     <dbl>         <dbl>      <dbl>         <dbl>         <dbl>      <dbl>         <dbl>     <dbl>        <dbl>
-#    1 Brazil  2020-05-23    347398  22013    142587         16508        965          7157          4.99       4.58          5.28      6.34         41.0
-#    2 Brazil  2020-05-24    363211  22666    149911         15813        653          7324          4.55       2.97          5.14      6.24         41.3
-#    3 Brazil  2020-05-25    374898  23473    153833         11687        807          3922          3.22       3.56          2.62      6.26         41.0
-#    4 Brazil  2020-05-26    391222  24512    158593         16324       1039          4760          4.35       4.43          3.09      6.27         40.5
-#    5 Brazil  2020-05-27    411821  25598    166647         20599       1086          8054          5.27       4.43          5.08      6.22         40.5
-#    6 Brazil  2020-05-28    438238  26754    177604         26417       1156         10957          6.41       4.52          6.57      6.10         40.5
-#    7 Brazil  2020-05-29    465166  27878    189476         26928       1124         11872          6.14       4.20          6.68      5.99         40.7
-#    8 Brazil  2020-05-30    498440  28834    200892         33274        956         11416          7.15       3.43          6.03      5.78         40.3
-#    9 Brazil  2020-05-31    514849  29314    206555         16409        480          5663          3.29       1.66          2.82      5.69         40.1
-#   10 Brazil  2020-06-01    526447  29937    211080         11598        623          4525          2.25       2.13          2.19      5.69         40.1
-#   11 Brazil  2020-06-02    555383  31199    223638         28936       1262         12558          5.50       4.22          5.95      5.62         40.3
-#   12 Brazil  2020-06-03    584016  32548    238617         28633       1349         14979          5.16       4.32          6.70      5.57         40.9
-#   13 Brazil  2020-06-04    614941  34021    254963         30925       1473         16346          5.30       4.53          6.85      5.53         41.5
-#   14 Brazil  2020-06-05    645771  35026    266940         30830       1005         11977          5.01       2.95          4.70      5.42         41.3
-#   15 Brazil  2020-06-06    672846  35930    277149         27075        904         10209          4.19       2.58          3.82      5.34         41.2
+#    country date       confirmed deaths recovered new_confirmed new_deaths new_recovered confirmed_inc deaths_inc recovered_inc death_pct recovery_pct
+#    <chr>   <date>         <int>  <int>     <int>         <int>      <int>         <int>         <dbl>      <dbl>         <dbl>     <dbl>        <dbl>
+#  1 Brazil  2020-12-07   6623911 177317   5897526         20371        376         30869         0.308      0.213        0.526       2.68         89.0
+#  2 Brazil  2020-12-08   6674999 178159   5965492         51088        842         67966         0.771      0.475        1.15        2.67         89.4
+#  3 Brazil  2020-12-09   6728452 178995   5966118         53453        836           626         0.801      0.469        0.0105      2.66         88.7
+#  4 Brazil  2020-12-10   6781799 179765   6043219         53347        770         77101         0.793      0.430        1.29        2.65         89.1
+#  5 Brazil  2020-12-11   6836227 180437   6078287         54428        672         35068         0.803      0.374        0.580       2.64         88.9
+#  6 Brazil  2020-12-12   6880127 181123   6078287         43900        686             0         0.642      0.380        0           2.63         88.3
+#  7 Brazil  2020-12-13   6901952 181402   6138349         21825        279         60062         0.317      0.154        0.988       2.63         88.9
+#  8 Brazil  2020-12-14   6927145 181835   6158049         25193        433         19700         0.365      0.239        0.321       2.62         88.9
+#  9 Brazil  2020-12-15   6970034 182799   6206483         42889        964         48434         0.619      0.530        0.787       2.62         89.0
+# 10 Brazil  2020-12-16   7040608 183735   6239192         70574        936         32709         1.01       0.512        0.527       2.61         88.6
+# 11 Brazil  2020-12-17   7110434 184827   6301547         69826       1092         62355         0.992      0.594        0.999       2.60         88.6
+# 12 Brazil  2020-12-18   7162978 185650   6322955         52544        823         21408         0.739      0.445        0.340       2.59         88.3
+# 13 Brazil  2020-12-19   7213155 186356   6388938         50177        706         65983         0.701      0.380        1.04        2.58         88.6
+# 14 Brazil  2020-12-20   7238600 186764   6408517         25445        408         19579         0.353      0.219        0.306       2.58         88.5
+# 15 Brazil  2020-12-21   7263619 187291   6469310         25019        527         60793         0.346      0.282        0.949       2.58         89.1
 
 
 # 3.1 - Country ----
@@ -249,35 +250,35 @@ covid_data %>%
 cls()
 covid_data %>%
    select(long) %>%
-   summarise('minimum' = min(long),
-             'maximum' = max(long),
-             'mean' = mean(long),
-             'median' = median(long),
-             'sd' = sd(long),
-             'IQR' = IQR(long),
-             'n_distinct' = n_distinct(long))
+   summarise('minimum' = min(long, na.rm = TRUE),
+             'maximum' = max(long, na.rm = TRUE),
+             'mean' = mean(long, na.rm = TRUE),
+             'median' = median(long, na.rm = TRUE),
+             'sd' = sd(long, na.rm = TRUE),
+             'IQR' = IQR(long, na.rm = TRUE),
+             'n_distinct' = n_distinct(long, na.rm = TRUE))
 
 covid_data %>%
    select(lat) %>%
-   summarise('minimum' = min(lat),
-             'maximum' = max(lat),
-             'mean' = mean(lat),
-             'median' = median(lat),
-             'sd' = sd(lat),
-             'IQR' = IQR(lat),
-             'n_distinct' = n_distinct(lat))
+   summarise('minimum' = min(lat, na.rm = TRUE),
+             'maximum' = max(lat, na.rm = TRUE),
+             'mean' = mean(lat, na.rm = TRUE),
+             'median' = median(lat, na.rm = TRUE),
+             'sd' = sd(lat, na.rm = TRUE),
+             'IQR' = IQR(lat, na.rm = TRUE),
+             'n_distinct' = n_distinct(lat, na.rm = TRUE))
 
 covid_data %>%
    select(long, lat) %>%
    gather() %>%
    group_by(key) %>%
-   summarise('minimum' = min(value),
-             'maximum' = max(value),
-             'mean' = mean(value),
-             'median' = median(value),
-             'sd' = sd(value),
-             'IQR' = IQR(value),
-             'n_distinct' = n_distinct(value))
+   summarise('minimum' = min(value, na.rm = TRUE),
+             'maximum' = max(value, na.rm = TRUE),
+             'mean' = mean(value, na.rm = TRUE),
+             'median' = median(value, na.rm = TRUE),
+             'sd' = sd(value, na.rm = TRUE),
+             'IQR' = IQR(value, na.rm = TRUE),
+             'n_distinct' = n_distinct(value, na.rm = TRUE))
 
 
 # 3.6 - Confirmed / Deaths / Recovered ----
@@ -552,7 +553,7 @@ covid_data %>%
    summarise(new_confirmed = sum(new_confirmed)) %>%
    ggplot(aes(x = date, y = new_confirmed)) +
    geom_line() +
-   facet_wrap(~ country, ncol = 4)
+   facet_wrap(~ country, ncol = 4, scales = "free")
 
 
 # 5.3 - Checking Spanish Data for April ----
@@ -590,10 +591,10 @@ covid_data %>%
    summarise(new_confirmed = sum(new_confirmed)) %>%
    ggplot(aes(x = date, y = new_confirmed)) +
    geom_line() +
-   facet_wrap(~ country, ncol = 5, scales = 'fixed')
+   facet_wrap(~ country, ncol = 5, scales = 'free')
 
 
-# 6.3 - Doing it the dumb way... ----
+6# 6.3 - Doing it the dumb way... ----
 
 covid_success <- function(input_value) {
 
